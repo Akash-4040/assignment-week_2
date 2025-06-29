@@ -10,24 +10,40 @@ public:
     void saveToFile() {
         ofstream out("items.txt");  // open file to write
         if (out.is_open()) {
-            out << name << "," << quantity << endl;  // write data
+            out << name << "," << quantity << endl;  // write name and quantity
             out.close();
             cout << "Item saved to file." << endl;
         } else {
-            cout << "Cannot open file." << endl;
+            cout << "Cannot open file to write." << endl;
+        }
+    }
+
+    void loadFromFile() {
+        ifstream in("items.txt");  // open file to read
+        if (in.is_open()) {
+            string line;
+            while (getline(in, line)) {  // read each line
+                cout << "File content: " << line << endl;
+            }
+            in.close();
+        } else {
+            cout << "Cannot open file to read." << endl;
         }
     }
 };
 
 int main() {
-    Item item;
+    Item tool;
 
     // assign values
-    item.name = "Apple";
-    item.quantity = 5;
+    tool.name = "Screwdriver";
+    tool.quantity = 10;
 
-    // save data to file
-    item.saveToFile();
+    // save to file
+    tool.saveToFile();
+
+    // read and display file content
+    tool.loadFromFile();
 
     return 0;
 }
