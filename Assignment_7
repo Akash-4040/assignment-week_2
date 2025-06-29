@@ -1,0 +1,52 @@
+#include <iostream>
+using namespace std;
+
+// Abstract base class
+class Item {
+public:
+    string name;
+    int quantity;
+
+    Item(string n, int q) {
+        name = n;
+        quantity = q;
+    }
+
+    virtual void display() = 0;  // Pure virtual function
+};
+
+// Derived class: Perishable
+class Perishable : public Item {
+public:
+    Perishable(string n, int q) : Item(n, q) {}
+
+    void display() override {
+        cout << name << " (Perishable), Qty: " << quantity << endl;
+    }
+};
+
+// Derived class: NonPerishable
+class NonPerishable : public Item {
+public:
+    NonPerishable(string n, int q) : Item(n, q) {}
+
+    void display() override {
+        cout << name << " (Non-Perishable), Qty: " << quantity << endl;
+    }
+};
+
+int main() {
+    // Base class pointers pointing to derived objects
+    Item* item1 = new Perishable("Milk", 10);
+    Item* item2 = new NonPerishable("Cereal", 20);
+
+    // Call display() using polymorphism
+    item1->display();
+    item2->display();
+
+    // Clean up memory
+    delete item1;
+    delete item2;
+
+    return 0;
+}
