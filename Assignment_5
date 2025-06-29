@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct Item {
+    string name;
+    int id;
+};
+
+int binarySearch(Item* items, int size, int searchId) {
+    int left = 0;
+    int right = size - 1;
+    while (left <= right) {
+        int mid = (left + right) / 2;
+        if (items[mid].id == searchId) return mid;
+        if (items[mid].id < searchId) left = mid + 1;
+        else right = mid - 1;
+    }
+    return -1;
+}
+
+int main() {
+    int size = 5;
+    Item* items = new Item[size];
+    items[0] = {"Apple", 101};
+    items[1] = {"Banana", 102};
+    items[2] = {"Cherry", 103};
+    items[3] = {"Date", 104};
+    items[4] = {"Elderberry", 105};
+
+    int searchId;
+    cout << "Enter ID to search: ";
+    cin >> searchId;
+
+    int index = binarySearch(items, size, searchId);
+    if (index != -1)
+        cout << "Found: " << items[index].name << " (ID: " << items[index].id << ")\n";
+    else
+        cout << "Item not found.\n";
+
+    delete[] items;
+    return 0;
+}
