@@ -7,38 +7,53 @@ struct Item {
     int id;
 };
 
-int binarySearch(Item* items, int size, int searchId) {
-    int left = 0;
-    int right = size - 1;
-    while (left <= right) {
-        int mid = (left + right) / 2;
-        if (items[mid].id == searchId) return mid;
-        if (items[mid].id < searchId) left = mid + 1;
-        else right = mid - 1;
+// Simple binary search to find id
+int binarySearch(Item* items, int size, int target) {
+    int start = 0;
+    int end = size - 1;
+
+    while (start <= end) {
+        int mid = (start + end) / 2;
+        if (items[mid].id == target) {
+            return mid;  // found it
+        }
+        else if (items[mid].id < target) {
+            start = mid + 1;
+        }
+        else {
+            end = mid - 1;
+        }
     }
-    return -1;
+    return -1; // not found
 }
 
 int main() {
-    int size = 5;
-    Item* items = new Item[size];
+    int n = 5;
 
-    items[0] = {"Apple", 101};
-    items[1] = {"Banana", 102};
-    items[2] = {"Cherry", 103};
-    items[3] = {"Date", 104};
-    items[4] = {"Elderberry", 105};
+    // Create array of items using new
+    Item* items = new Item[n];
 
+    // Fill array with sample data (sorted by id)
+    items[0].name = "Apple";     items[0].id = 10;
+    items[1].name = "Banana";    items[1].id = 20;
+    items[2].name = "Cherry";    items[2].id = 30;
+    items[3].name = "Date";      items[3].id = 40;
+    items[4].name = "Elderberry";items[4].id = 50;
+
+    cout << "Enter an ID to search: ";
     int searchId;
-    cout << "Enter ID to search: ";
     cin >> searchId;
 
-    int index = binarySearch(items, size, searchId);
-    if (index != -1)
-        cout << "Found: " << items[index].name << " (ID: " << items[index].id << ")\n";
-    else
-        cout << "Item not found.\n";
+    int result = binarySearch(items, n, searchId);
 
+    if (result != -1) {
+        cout << "Found: " << items[result].name << " with ID " << items[result].id << endl;
+    } else {
+        cout << "Item not found!" << endl;
+    }
+
+    // Free memory
     delete[] items;
+
     return 0;
 }
