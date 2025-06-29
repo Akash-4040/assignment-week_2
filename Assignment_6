@@ -1,0 +1,33 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+class Item {
+public:
+    string name;
+    int quantity;
+
+    void saveToFile() {
+        ofstream out("items.txt");  // open file to write
+        if (out.is_open()) {
+            out << name << "," << quantity << endl;  // write data
+            out.close();
+            cout << "Item saved to file." << endl;
+        } else {
+            cout << "Cannot open file." << endl;
+        }
+    }
+};
+
+int main() {
+    Item item;
+
+    // assign values
+    item.name = "Apple";
+    item.quantity = 5;
+
+    // save data to file
+    item.saveToFile();
+
+    return 0;
+}
