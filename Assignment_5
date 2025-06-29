@@ -22,6 +22,7 @@ int binarySearch(Item* items, int size, int searchId) {
 int main() {
     int size = 5;
     Item* items = new Item[size];
+
     items[0] = {"Apple", 101};
     items[1] = {"Banana", 102};
     items[2] = {"Cherry", 103};
