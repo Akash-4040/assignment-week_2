@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 using namespace std;
 
 class Item {
@@ -8,42 +9,14 @@ public:
     int quantity;
 
     void saveToFile() {
-        ofstream out("items.txt");  // open file to write
+        ofstream out("items.txt");
         if (out.is_open()) {
-            out << name << "," << quantity << endl;  // write name and quantity
+            out << name << "," << quantity << endl;
             out.close();
             cout << "Item saved to file." << endl;
         } else {
-            cout << "Cannot open file to write." << endl;
+            cout << "Unable to open file for writing." << endl;
         }
     }
 
-    void loadFromFile() {
-        ifstream in("items.txt");  // open file to read
-        if (in.is_open()) {
-            string line;
-            while (getline(in, line)) {  // read each line
-                cout << "File content: " << line << endl;
-            }
-            in.close();
-        } else {
-            cout << "Cannot open file to read." << endl;
-        }
-    }
-};
-
-int main() {
-    Item tool;
-
-    // assign values
-    tool.name = "Screwdriver";
-    tool.quantity = 10;
-
-    // save to file
-    tool.saveToFile();
-
-    // read and display file content
-    tool.loadFromFile();
-
-    return 0;
-}
+    // Optional method to read and display data from file
